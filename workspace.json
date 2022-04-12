@@ -1,4 +1,8 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "fbclient": "apps/fbclient",
+    "fbclient-e2e": "apps/fbclient-e2e",
+    "server": "apps/server"
+  }
 }

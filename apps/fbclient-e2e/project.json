@@ -1,0 +1,28 @@
+{
+  "root": "apps/fbclient-e2e",
+  "sourceRoot": "apps/fbclient-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/fbclient-e2e/cypress.json",
+        "devServerTarget": "fbclient:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "fbclient:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fbclient-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["fbclient"]
+}
