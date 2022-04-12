@@ -50,10 +50,11 @@ function LogoWrapper() {
             width: '300px',
             fontWeight: 'bold',
             opacity: '0.7',
-            lineHeight: '2rem',
+            lineHeight: '1.3rem',
             '@media (min-width: 576px)': {
               fontSize: '1.3rem',
               width: '430px',
+              lineHeight: '1.6rem',
             },
             '@media (min-width: 768px)': {
               fontSize: '1.6rem',
@@ -62,6 +63,7 @@ function LogoWrapper() {
             '@media (min-width: 992px)': {
               fontSize: '1.6rem',
               width: '100%',
+              lineHeight: '1.9rem',
 
               textAlign: 'left',
             },

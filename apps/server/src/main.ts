@@ -24,7 +24,11 @@ const port  = process.env.PORT || 4000;
 
 
   async function startApolloServer(typeDefs, resolvers) {
-    const app = Hapi.server({ port });
+    const app = Hapi.server({ 
+      port: port,
+     host: 'localhost',
+    
+       });
 
     app.route(register);
     app.route(login)

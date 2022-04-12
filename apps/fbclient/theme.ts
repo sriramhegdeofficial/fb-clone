@@ -14,7 +14,7 @@ export const theme = {
       '#1877f2',
       '#f0f2f5',
       '#ffffff',
-      '#f0a2f5',
+      '#42b72a',
       '#f0f2f5',
       '#f6f2f5',
       '#f0fqf5',

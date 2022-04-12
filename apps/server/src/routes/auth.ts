@@ -1,84 +1,91 @@
 import { ResponseToolkit, Request } from 'hapi';
 import * as Boom from '@hapi/boom';
 import bcrypt = require('bcryptjs');
-import { PrismaClient } from '@prisma/client'
-import  { jwtfuncs }  from './../utils/jwt'
+import { PrismaClient } from '@prisma/client';
+import { jwtfuncs } from './../utils/jwt';
+import { resolve } from 'path';
+import { rejects } from 'assert';
 
-
-
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 interface UserInput {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export const register = {
-    method: 'POST',
-    path: '/register',
-    handler: async (request: Request , h: ResponseToolkit) => {
-    
-        const usercred  = request.payload as UserInput;
-        const userAlreadyExists = await prisma.user.findUnique({
-            where: {
-              email: usercred.email,
-            },
-          })
-          console.log(userAlreadyExists)
-          console.log(usercred)
-         
-          if(userAlreadyExists)  {
-             return  Boom.badRequest("Email is taken.")
-          }
-          
-        
-        let {  password }  = request.payload as UserInput;
-       
-        password = bcrypt.hashSync(password, 8);
-        const user = await prisma.user.create({
-            data: {
-                email: usercred.email,
-                password: password,
-              },
+  method: 'POST',
+  path: '/register',
+  options: {
+    cors: {
+      origin: ['http://localhost:4200'],
+      credentials: true,
+      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
+    },
+
+    handler: async (request: Request, h: ResponseToolkit) => {
+      const usercred = request.payload as UserInput;
+      const userAlreadyExists = await prisma.user.findUnique({
+        where: {
+          email: usercred.email,
+        },
+      });
+
+      if (userAlreadyExists) {
+        return Boom.badRequest('Email is taken.');
+      }
+
+      const password = bcrypt.hashSync(usercred.password, 8);
+      const user = await prisma.user.create({
+        data: {
+          email: usercred.email,
+          password: password,
+        },
+      });
+      const accessToken = await jwtfuncs.signAccessToken(user);
+
+      return h
+        .response({
+          accessToken,
         })
-        const accessToken   = await jwtfuncs.signAccessToken(user);
-
-        return h.response({
-            accessToken
-        }).code(200)
-            
- 
-            
-        
-        
-    }
-
-}
+        .code(200);
+    },
+  },
+};
 
 export const login = {
-    method: 'POST',
-      path: '/login',
-      handler: async (request: Request , h: ResponseToolkit) => {
-        const { email, password } = request.payload as UserInput;
+  method: 'POST',
+  path: '/login',
+
+  options: {
+    cors: {
+      origin: ['http://localhost:4200'],
+      credentials: true,
+      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
+    },
+
+    handler: async (request: Request, h: ResponseToolkit) => {
+      const { email, password } = request.payload as UserInput;
       const user = await prisma.user.findUnique({
-          where: {
-              email
-          }
+        where: {
+          email,
+        },
       });
       if (!user) {
-          return Boom.notFound("User not registered")
+        return Boom.notFound('User not registered');
       }
-      const checkPassword = bcrypt.compareSync(password, user.password)
+      const checkPassword = bcrypt.compareSync(password, user.password);
       if (!checkPassword) {
-        Boom.unauthorized("Email or passsword is invalid")
+        Boom.unauthorized('Email or passsword is invalid');
       }
-      delete user.password
-      const accessToken = await jwtfuncs.signAccessToken(user)
-      return  h.response({
-        ...user,
-        accessToken
-      }).code(200)
-  }
- 
-      
-  }
+      delete user.password;
+      const accessToken = await jwtfuncs.signAccessToken(user);
+
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(h.response({ ...user, accessToken }).code(200));
+        }, 5000);
+      });
+    },
+  },
+};
