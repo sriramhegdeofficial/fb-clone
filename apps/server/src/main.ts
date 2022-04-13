@@ -2,7 +2,7 @@
 import { ApolloServer,ApolloServerPluginStopHapiServer,gql} from 'apollo-server-hapi';
 import * as Hapi from '@hapi/hapi';
 import { register, login} from './routes/auth'
-
+import { ResponseToolkit, Request } from 'hapi';
 
 
 
@@ -30,12 +30,18 @@ const port  = process.env.PORT || 4000;
   async function startApolloServer(typeDefs, resolvers) {
     const app = Hapi.server({ 
       port: port,
-     host: 'localhost',
+      host: 'https://facebooksri.herokuapp.com'
   
        });
 
 
-
+    app.route({
+      method: 'GET',
+      path: '/',
+      handler: (request: Request, h: ResponseToolkit) => {
+        return h.response("hello")
+      }
+    })
     app.route(register);
     app.route(login)
 
