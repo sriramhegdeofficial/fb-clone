@@ -1,20 +1,45 @@
 import { AppShell, Box } from '@mantine/core';
-
-import Head from 'next/head';
-import React, { FC } from 'react';
-
-import LoginForm from '../components/LoginForm';
-import LogoWrapper from '../components/LogoWrapper';
+import { useLocalStorage } from '@mantine/hooks';
 import axios from 'axios';
 
-const index: FC = ({ children }) => {
+import Head from 'next/head';
+import React from 'react';
+import LoginForm from '../components/LoginForm';
+import LogoWrapper from '../components/LogoWrapper';
+import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/router';
+import { useSession } from '../hooks/useSession';
+
+const Index = () => {
+  const [user, setUser] = useLocalStorage({ key: 'user', defaultValue: null });
+  const [token, setToken] = useLocalStorage({
+    key: 'token',
+    defaultValue: null,
+  });
+  const isAuth = useSession();
+  const router = useRouter();
+
   const loginHandler = async (values) => {
-    const res = await axios.post('http://localhost:4000/register', {
+    const res = await axios.post('http://localhost:4000/login', {
       email: values.email,
       password: values.password,
     });
-    console.log(res);
+    setToken(res.data.accessToken);
+    await setUser(jwt.decode(res.data.accessToken).payload);
+    console.log(user);
+    router.push('/feed');
   };
+
+  React.useEffect(() => {
+    if (isAuth) {
+      router.push('/feed');
+    }
+  });
+
+  if (isAuth) {
+    return <div></div>;
+  }
+
   return (
     <>
       <Head>
@@ -57,4 +82,4 @@ const index: FC = ({ children }) => {
   );
 };
 
-export default index;
+export default Index;

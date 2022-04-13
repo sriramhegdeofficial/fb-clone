@@ -5,7 +5,6 @@ import {
   Button,
   Box,
   TextInput,
-  Checkbox,
   Divider,
 } from '@mantine/core';
 import Link from 'next/link';
@@ -13,16 +12,15 @@ import { theme } from '../theme';
 import React, { FC } from 'react';
 import { z } from 'zod';
 
-interface RegisterType {
+interface ICredentials {
   email: string;
   password: string;
 }
-
-interface loginFormTypes {
-  loginHandler: (values: RegisterType) => void;
+interface ILogin {
+  loginHandler: (values: ICredentials) => void;
 }
 
-const LoginForm: FC<loginFormTypes> = ({ loginHandler }) => {
+const LoginForm: FC<ILogin> = ({ loginHandler }) => {
   const emailRef = React.useRef(null);
 
   const schema = z.object({

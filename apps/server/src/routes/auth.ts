@@ -79,13 +79,12 @@ export const login = {
         Boom.unauthorized('Email or passsword is invalid');
       }
       delete user.password;
+      delete user.id
       const accessToken = await jwtfuncs.signAccessToken(user);
 
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(h.response({ ...user, accessToken }).code(200));
-        }, 5000);
-      });
+          return h.response({  accessToken }).code(200)
+      
+      
     },
   },
 };
