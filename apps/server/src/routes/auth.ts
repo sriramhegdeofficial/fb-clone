@@ -3,8 +3,7 @@ import * as Boom from '@hapi/boom';
 import bcrypt = require('bcryptjs');
 import { PrismaClient } from '@prisma/client';
 import { jwtfuncs } from './../utils/jwt';
-import { resolve } from 'path';
-import { rejects } from 'assert';
+
 
 const prisma = new PrismaClient();
 
@@ -15,7 +14,7 @@ interface UserInput {
 
 export const register = {
   method: 'POST',
-  path: '/api/register',
+  path: '/register',
   options: {
     cors: {
       origin: ['http://localhost:4200'],
@@ -55,7 +54,7 @@ export const register = {
 
 export const login = {
   method: 'POST',
-  path: '/api/login',
+  path: '/login',
 
   options: {
     cors: {

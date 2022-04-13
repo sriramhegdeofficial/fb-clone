@@ -16,7 +16,7 @@ const jwt_1 = __webpack_require__("./apps/server/src/utils/jwt.ts");
 const prisma = new client_1.PrismaClient();
 exports.register = {
     method: 'POST',
-    path: '/api/register',
+    path: '/register',
     options: {
         cors: {
             origin: ['http://localhost:4200'],
@@ -51,7 +51,7 @@ exports.register = {
 };
 exports.login = {
     method: 'POST',
-    path: '/api/login',
+    path: '/login',
     options: {
         cors: {
             origin: ['http://localhost:4200'],
@@ -228,8 +228,7 @@ const resolvers = {
 function startApolloServer(typeDefs, resolvers) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const app = Hapi.server({
-            port: process.env.PORT,
-            host: 'facebooksri.herokuapp.com'
+            port: process.env.PORT || 4000,
         });
         app.route({
             method: 'GET',
@@ -251,7 +250,7 @@ function startApolloServer(typeDefs, resolvers) {
     });
 }
 startApolloServer(typeDefs, resolvers)
-    .then(() => console.log(`successfully running on port ${process.env.PORT}`));
+    .then(() => console.log(`successfully running on port ${process.env.PORT || 4000}`));
 
 })();
 
