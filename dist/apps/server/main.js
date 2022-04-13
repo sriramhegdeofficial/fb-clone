@@ -230,7 +230,14 @@ function startApolloServer(typeDefs, resolvers) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const app = Hapi.server({
             port: port,
-            host: 'localhost',
+            host: 'https://facebooksri.herokuapp.com'
+        });
+        app.route({
+            method: 'GET',
+            path: '/',
+            handler: (request, h) => {
+                return h.response("hello");
+            }
         });
         app.route(auth_1.register);
         app.route(auth_1.login);

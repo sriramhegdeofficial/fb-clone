@@ -23,13 +23,13 @@ const resolvers = {
 
 
 
-const port  = process.env.PORT || 4000;
+
 
 
 
   async function startApolloServer(typeDefs, resolvers) {
     const app = Hapi.server({ 
-      port: port,
+      port: process.env.PORT,
       host: 'https://facebooksri.herokuapp.com'
   
        });
@@ -60,4 +60,4 @@ const port  = process.env.PORT || 4000;
   }
 
  startApolloServer(typeDefs, resolvers)
-.then(() => console.log(`successfully running on port ${port}`))
+.then(() => console.log(`successfully running on port ${process.env.PORT}`))
