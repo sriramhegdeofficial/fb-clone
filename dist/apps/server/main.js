@@ -16,7 +16,7 @@ const jwt_1 = __webpack_require__("./apps/server/src/utils/jwt.ts");
 const prisma = new client_1.PrismaClient();
 exports.register = {
     method: 'POST',
-    path: '/register',
+    path: '/api/register',
     options: {
         cors: {
             origin: ['http://localhost:4200'],
@@ -51,7 +51,7 @@ exports.register = {
 };
 exports.login = {
     method: 'POST',
-    path: '/login',
+    path: '/api/login',
     options: {
         cors: {
             origin: ['http://localhost:4200'],
