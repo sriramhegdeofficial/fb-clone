@@ -17,7 +17,7 @@ export const register = {
   path: '/register',
   options: {
     cors: {
-      origin: ['http://localhost:4200'],
+      origin: ['*'],
       credentials: true,
       additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
     },
@@ -58,7 +58,7 @@ export const login = {
 
   options: {
     cors: {
-      origin: ['http://localhost:4200'],
+      origin: ['*'],
       credentials: true,
       additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
     },
