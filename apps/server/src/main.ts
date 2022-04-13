@@ -3,6 +3,10 @@ import { ApolloServer,ApolloServerPluginStopHapiServer,gql} from 'apollo-server-
 import * as Hapi from '@hapi/hapi';
 import { register, login} from './routes/auth'
 
+
+
+
+
 const typeDefs = gql`
 
 type Query {
@@ -27,11 +31,15 @@ const port  = process.env.PORT || 4000;
     const app = Hapi.server({ 
       port: port,
      host: 'localhost',
-    
+  
        });
+
+
 
     app.route(register);
     app.route(login)
+
+    
 
 
     const server = new ApolloServer({

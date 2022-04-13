@@ -65,6 +65,7 @@ const LoginForm: FC<ILogin> = ({ loginHandler }) => {
         <TextInput
           id="email input"
           size="lg"
+          autoComplete="off"
           placeholder="Email address"
           {...form.getInputProps('email')}
           value={form.values.email}
@@ -82,6 +83,7 @@ const LoginForm: FC<ILogin> = ({ loginHandler }) => {
 
         <PasswordInput
           id="password input"
+          autoComplete="off"
           styles={{
             rightSection: { display: 'none', width: '0px' },
             innerInput: { width: '95%' },
