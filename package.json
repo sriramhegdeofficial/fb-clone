@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/apps/server/main",
     "test": "nx test",
-    "heroku-postbuild": "npx prisma migrate deploy && npm build:production"
+    "heroku-postbuild": "npx prisma migrate deploy"
   },
   "engines" : {
     "node" : "16.13.1"
