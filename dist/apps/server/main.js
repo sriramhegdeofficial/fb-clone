@@ -225,11 +225,10 @@ const resolvers = {
         sayHi: () => 'hello hi'
     }
 };
-const port = process.env.PORT || 4000;
 function startApolloServer(typeDefs, resolvers) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const app = Hapi.server({
-            port: port,
+            port: process.env.PORT,
             host: 'https://facebooksri.herokuapp.com'
         });
         app.route({
@@ -252,7 +251,7 @@ function startApolloServer(typeDefs, resolvers) {
     });
 }
 startApolloServer(typeDefs, resolvers)
-    .then(() => console.log(`successfully running on port ${port}`));
+    .then(() => console.log(`successfully running on port ${process.env.PORT}`));
 
 })();
 

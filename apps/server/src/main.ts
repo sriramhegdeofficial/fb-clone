@@ -30,7 +30,7 @@ const resolvers = {
   async function startApolloServer(typeDefs, resolvers) {
     const app = Hapi.server({ 
       port: process.env.PORT,
-      host: 'https://facebooksri.herokuapp.com'
+      
   
        });
 
