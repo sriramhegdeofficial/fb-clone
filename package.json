@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/apps/server/main",
-    "test": "nx test",
-    "heroku-postbuild": "npx prisma migrate deploy"
+    "test": "nx test"
+    
   },
   "engines" : {
     "node" : "16.13.1"
