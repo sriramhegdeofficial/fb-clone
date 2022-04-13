@@ -229,6 +229,7 @@ function startApolloServer(typeDefs, resolvers) {
     return tslib_1.__awaiter(this, void 0, void 0, function* () {
         const app = Hapi.server({
             port: process.env.PORT,
+            host: 'facebooksri.herokuapp.com'
         });
         app.route({
             method: 'GET',
