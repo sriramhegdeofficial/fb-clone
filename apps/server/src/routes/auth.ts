@@ -14,7 +14,7 @@ interface UserInput {
 
 export const register = {
   method: 'POST',
-  path: '/register',
+  path: '/api/register',
   options: {
     cors: {
       origin: ['*'],
@@ -54,7 +54,7 @@ export const register = {
 
 export const login = {
   method: 'POST',
-  path: '/login',
+  path: '/api/login',
 
   options: {
     cors: {
