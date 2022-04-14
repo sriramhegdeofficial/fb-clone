@@ -33,7 +33,7 @@ export const register = {
       });
         console.log(`fetched useralready exists ${userAlreadyExists}`)
       if (userAlreadyExists) {
-        console.log('inside boom user already exists')
+        console.log('inside boom user already')
         return Boom.badRequest('Email is taken.');
       }
 
@@ -48,6 +48,7 @@ export const register = {
           password: password,
         },
       });
+      console.log(`user after created ${user}`)
       const accessToken = await jwtfuncs.signAccessToken(user);
 
       return h

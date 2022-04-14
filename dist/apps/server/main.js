@@ -33,7 +33,7 @@ exports.register = {
             });
             console.log(`fetched useralready exists ${userAlreadyExists}`);
             if (userAlreadyExists) {
-                console.log('inside boom user already exists');
+                console.log('inside boom user already');
                 return Boom.badRequest('Email is taken.');
             }
             console.log(`password not hashed ${usercred.password}`);
@@ -45,6 +45,7 @@ exports.register = {
                     password: password,
                 },
             });
+            console.log(`user after created ${user}`);
             const accessToken = yield jwt_1.jwtfuncs.signAccessToken(user);
             return h
                 .response({
