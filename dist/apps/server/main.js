@@ -24,12 +24,14 @@ exports.register = {
             additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
         },
         handler: (request, h) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+            console.log(`started at register`);
             const usercred = request.payload;
             const userAlreadyExists = yield prisma.user.findUnique({
                 where: {
                     email: usercred.email,
                 },
             });
+            console.log(`fetched useralready exists ${userAlreadyExists}`);
             if (userAlreadyExists) {
                 return Boom.badRequest('Email is taken.');
             }

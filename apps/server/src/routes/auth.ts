@@ -23,13 +23,14 @@ export const register = {
     },
 
     handler: async (request: Request, h: ResponseToolkit) => {
+      console.log(`started at register`)
       const usercred = request.payload as UserInput;
       const userAlreadyExists = await prisma.user.findUnique({
         where: {
           email: usercred.email,
         },
       });
-
+        console.log(`fetched useralready exists ${userAlreadyExists}`)
       if (userAlreadyExists) {
         return Boom.badRequest('Email is taken.');
       }
