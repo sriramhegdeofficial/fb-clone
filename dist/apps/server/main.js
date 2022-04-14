@@ -20,8 +20,8 @@ exports.register = {
     options: {
         cors: {
             origin: ['*'],
-            credentials: true,
-            additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
+            // credentials: true,
+            // additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
         },
         handler: (request, h) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
             console.log(`started at register`);

@@ -18,8 +18,8 @@ export const register = {
   options: {
     cors: {
       origin: ['*'],
-      credentials: true,
-      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
+      // credentials: true,
+      // additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN'],
     },
 
     handler: async (request: Request, h: ResponseToolkit) => {
