@@ -33,10 +33,15 @@ export const register = {
       });
         console.log(`fetched useralready exists ${userAlreadyExists}`)
       if (userAlreadyExists) {
+        console.log('inside boom user already exists')
         return Boom.badRequest('Email is taken.');
       }
+
+      console.log(`password not hashed ${usercred.password}`)
           
       const password = bcrypt.hashSync(usercred.password, 8);
+
+      console.log(`password hashed ${password}`)
       const user = await prisma.user.create({
         data: {
           email: usercred.email,
