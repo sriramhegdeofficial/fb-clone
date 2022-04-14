@@ -1,7 +1,7 @@
 import jwt = require('jsonwebtoken')
 import createError = require('http-errors')
 import * as dotenv from 'dotenv'
-//require('dotenv').config()
+dotenv.config()
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
 export const jwtfuncs = {

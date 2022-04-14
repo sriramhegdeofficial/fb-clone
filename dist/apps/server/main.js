@@ -97,7 +97,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.jwtfuncs = void 0;
 const jwt = __webpack_require__("jsonwebtoken");
 const createError = __webpack_require__("http-errors");
-//require('dotenv').config()
+const dotenv = __webpack_require__("dotenv");
+dotenv.config();
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 exports.jwtfuncs = {
     signAccessToken(payload) {
@@ -158,6 +159,13 @@ module.exports = require("apollo-server-hapi");
 /***/ ((module) => {
 
 module.exports = require("bcryptjs");
+
+/***/ }),
+
+/***/ "dotenv":
+/***/ ((module) => {
+
+module.exports = require("dotenv");
 
 /***/ }),
 

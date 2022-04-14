@@ -5,10 +5,9 @@
   "scripts": {
     "start": "node dist/apps/server/main",
     "test": "nx test"
-    
   },
-  "engines" : {
-    "node" : "16.13.1"
+  "engines": {
+    "node": "16.13.1"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +27,7 @@
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
     "core-js": "^3.6.5",
+    "dotenv": "^16.0.0",
     "graphql": "^16.3.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
