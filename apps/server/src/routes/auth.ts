@@ -1,6 +1,6 @@
 import { ResponseToolkit, Request } from 'hapi';
 import * as Boom from '@hapi/boom';
-import bcrypt = require('bcryptjs');
+import * as  bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { jwtfuncs } from './../utils/jwt';
 
@@ -25,6 +25,7 @@ export const register = {
     handler: async (request: Request, h: ResponseToolkit) => {
       console.log(`started at register`)
       const usercred = request.payload as UserInput;
+
       const userAlreadyExists = await prisma.user.findUnique({
         where: {
           email: usercred.email,
@@ -34,7 +35,7 @@ export const register = {
       if (userAlreadyExists) {
         return Boom.badRequest('Email is taken.');
       }
-
+          
       const password = bcrypt.hashSync(usercred.password, 8);
       const user = await prisma.user.create({
         data: {
